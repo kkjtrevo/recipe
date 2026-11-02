@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POWERHOUSE | Smart Campus</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1220;color:#edf4fc;font-family:Arial,sans-serif}
+header{padding:22px;background:#111f32;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #26374b}
+.logo{font-size:21px;font-weight:bold;color:#40d69a}
+.logo small{display:block;color:#9aacc0;font-size:10px;letter-spacing:2px;margin-top:4px}
+main{max-width:1100px;margin:auto;padding:22px}
+h1{font-size:25px;margin-bottom:5px}
+.sub{color:#9aacc0;font-size:13px}
+nav{display:flex;gap:8px;overflow-x:auto;padding:16px 0}
+nav button{background:#1b2b40;color:#cbd8e8;border:0;padding:12px 16px;border-radius:9px;white-space:nowrap;cursor:pointer}
+nav button.active{background:#16865d;color:white}
+.page{display:none}.page.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:20px 0}
+.card{background:#15263a;padding:18px;border-radius:13px;border:1px solid #263b51}
+.metric{font-size:29px;font-weight:bold;margin:12px 0 5px}
+.muted{color:#9aacc0;font-size:12px}
+.green{color:#40d69a}.yellow{color:#ffc66d}.red{color:#ff7777}
+.labs{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.lab{background:#15263a;border:1px solid #263b51;border-radius:13px;padding:18px}
+.lab h3{margin:0 0 8px}
+.status{font-size:11px;padding:6px 9px;border-radius:20px;background:#174c3b;color:#65e6ae}
+.free{background:#193d59;color:#75caff}
+.warning{background:#58421e;color:#ffd17a}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.info{margin-top:18px;padding-top:14px;border-top:1px solid #304258;color:#bdcddd;font-size:13px;line-height:2}
+.section-title{margin-top:25px}
+.alert{padding:16px;border-radius:10px;background:#49351e;color:#ffe0a7;margin:16px 0;font-size:13px}
+button{cursor:pointer}
+.action{border:0;border-radius:8px;padding:10px 14px;background:#16865d;color:white;margin-top:10px}
+select{background:#1b2b40;color:white;border:1px solid #40536b;padding:10px;border-radius:8px}
+.bar{height:12px;background:#30445a;border-radius:10px;overflow:hidden;margin:12px 0}
+.bar span{display:block;height:100%;background:#40d69a;border-radius:10px}
+footer{text-align:center;color:#758ba4;font-size:11px;padding:30px}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.labs{grid-template-columns:1fr}main{padding:15px}.metric{font-size:25px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">⚡ POWERHOUSE<small>SMART CAMPUS · IVS</small></div>
+<div>🟢 <span style="font-size:11px">ONLINE</span></div>
+</header>
+<main>
+<h1>Olá, Administrador!</h1>
+<div class="sub">Instituto Vale do Sol · Gerenciamento inteligente</div>
+
+<nav>
+<button class="active" onclick="show('inicio',this)">Visão geral</button>
+<button onclick="show('laboratorios',this)">Laboratórios</button>
+<button onclick="show('automacao',this)">Automação</button>
+<button onclick="show('seguranca',this)">Segurança</button>
+<button onclick="show('relatorios',this)">Relatórios</button>
+</nav>
+
+<section id="inicio" class="page active">
+<h2>Dashboard</h2>
+<div class="grid">
+<div class="card">🏢<div class="metric">12</div><div class="muted">Laboratórios</div></div>
+<div class="card">👥<div class="metric">30</div><div class="muted">Pessoas detectadas</div></div>
+<div class="card">⚠️<div class="metric yellow">01</div><div class="muted">Alertas ativos</div></div>
+<div class="card">📊<div class="metric green">75%</div><div class="muted">Taxa de ocupação</div></div>
+</div>
+<h2 class="section-title">Ambientes monitorados</h2>
+<div class="labs" id="resumo"></div>
+<div class="alert">⚠️ Atenção: Laboratório 04 está com a porta destrancada e equipamentos ligados.</div>
+</section>
+
+<section id="laboratorios" class="page">
+<h2>Gerenciamento dos laboratórios</h2>
+<p class="muted">Selecione um ambiente para consultar seus dados.</p>
+<select id="seletor" onchange="detalhar()">
+<option>Laboratório 01</option><option>Laboratório 02</option>
+<option>Laboratório 03</option><option>Laboratório 04</option>
+</select>
+<div class="card" style="margin-top:15px" id="detalhes"></div>
+</section>
+
+<section id="automacao" class="page">
+<h2>Automação inteligente</h2>
+<p class="muted">Monitoramento dos equipamentos e sensores.</p>
+<div class="labs">
+<div class="card">💡<h3>Iluminação</h3><p class="muted">Sensores de presença e luminosidade</p><span class="green">● Monitoramento ativo</span></div>
+<div class="card">❄️<h3>Ar-condicionado</h3><p class="muted">Controle de climatização</p><span class="green">● Monitoramento ativo</span></div>
+<div class="card">🌡️<h3>Temperatura</h3><p class="muted">Leitura dos sensores ambientais</p><span class="green">● Monitoramento ativo</span></div>
+<div class="card">📡<h3>Presença</h3><p class="muted">Detecção de ocupação dos ambientes</p><span class="green">● Monitoramento ativo</span></div>
+</div>
+</section>
+
+<section id="seguranca" class="page">
+<h2>Central de segurança</h2>
+<div class="alert">⚠️ Laboratório 04: porta destrancada.</div>
+<div class="grid">
+<div class="card"><div class="metric green">11/12</div><div class="muted">Portas trancadas</div></div>
+<div class="card"><div class="metric red">1/12</div><div class="muted">Portas destrancadas</div></div>
+</div>
+<div class="card">
+<h3>🔐 Controle de acesso</h3>
+<p class="muted">Acesso por credenciais autorizadas para professores selecionados.</p>
+<span class="green">● Sistema de controle previsto</span>
+</div>
+</section>
+
+<section id="relatorios" class="page">
+<h2>Relatórios e indicadores</h2>
+<p class="muted">Exemplo ilustrativo de utilização dos laboratórios.</p>
+<div class="card">
+<h3>Taxa de ocupação</h3>
+<div class="metric green">75%</div>
+<div class="bar"><span style="width:75%"></span></div>
+</div>
+<div class="card" style="margin-top:15px">
+<h3>Ocupação semanal</h3>
+<div id="grafico"></div>
+</div>
+</section>
+</main>
+<footer>POWERHOUSE Solutions · Instituto Vale do Sol<br>Protótipo demonstrativo · Versão 1.0</footer>
+
+<script>
+const labs=[
+{name:"Laboratório 01",tipo:"Informática",status:"Ocupado",pessoas:18,temp:22,luz:"Ligada",ar:"Ligado",porta:"Trancada"},
+{name:"Laboratório 02",tipo:"Eletrônica",status:"Livre",pessoas:0,temp:24,luz:"Desligada",ar:"Desligado",porta:"Trancada"},
+{name:"Laboratório 03",tipo:"Redes",status:"Ocupado",pessoas:12,temp:21,luz:"Ligada",ar:"Ligado",porta:"Trancada"},
+{name:"Laboratório 04",tipo:"Automação",status:"Atenção",pessoas:0,temp:26,luz:"Ligada",ar:"Ligado",porta:"Destrancada"}
+];
+
+function show(id,btn){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+if(id==='laboratorios')detalhar();
+}
+
+function montarResumo(){
+document.getElementById('resumo').innerHTML=labs.map(l=>`
+<div class="lab">
+<div class="row"><h3>${l.name}</h3><span class="status ${l.status==='Livre'?'free':l.status==='Atenção'?'warning':''}">${l.status}</span></div>
+<div class="muted">${l.tipo}</div>
+<div class="info">👥 ${l.pessoas} pessoas<br>🌡️ ${l.temp}°C<br>💡 Luz: ${l.luz}<br>❄️ Ar: ${l.ar}<br>🔐 Porta: ${l.porta}</div>
+</div>`).join('');
+}
+
+function detalhar(){
+let l=labs[document.getElementById('seletor').selectedIndex];
+document.getElementById('detalhes').innerHTML=`
+<h2>${l.name}</h2><p class="muted">${l.tipo} · ${l.status}</p>
+<div class="info">👥 Pessoas detectadas: ${l.pessoas}<br>🌡️ Temperatura: ${l.temp}°C<br>💡 Iluminação: ${l.luz}<br>❄️ Ar-condicionado: ${l.ar}<br>🔐 Fechadura: ${l.porta}</div>`;
+}
+
+document.getElementById('grafico').innerHTML=[
+['Segunda',55],['Terça',75],['Quarta',85],['Quinta',65],['Sexta',70]
+].map(x=>`<div style="margin:13px 0;font-size:12px">${x[0]} · ${x[1]}%<div class="bar"><span style="width:${x[1]}%"></span></div></div>`).join('');
+
+montarResumo();
+detalhar();
+</script>
+</body>
+</html> 
+a
